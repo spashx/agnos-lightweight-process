@@ -11,7 +11,7 @@ git command is executed. This is the canonical procedure, shared by GitHub Copil
 (`.github/skills/agnos-git-workflow/`) and Claude Code (`.claude/skills/agnos-git-workflow/`,
 which points here) — see ADR-PRT-001.
 
-## Script Selection (RQ-PRT-006)
+## Script Selection 
 
 Every validation step below runs a `<validate-ids>` script. Select it from `session.platform`
 (read `process/_sessionstate/session.yaml` first if not already in context):
@@ -26,7 +26,7 @@ installed (RQ-PRT-007).
 
 ## Sub-Commands
 
-### `start-session <TRI>` — Feature Branch Creation (RQ-GIT-001)
+### `start-session <TRI>` — Feature Branch Creation 
 
 **When to use**: START SESSION step 8 — at the beginning of every new session.
 
@@ -49,7 +49,7 @@ installed (RQ-PRT-007).
 
 ---
 
-### `commit-task <TASK-ID> [<ADR-ID>] <description>` — Task Commit (RQ-GIT-002)
+### `commit-task <TASK-ID> [<ADR-ID>] <description>` — Task Commit 
 
 **When to use**: DoD commit step — when a task is marked Done.
 
