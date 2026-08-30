@@ -9,7 +9,7 @@ argument-hint: "start-session <TRI> | commit-task <TASK-ID> [<ADR-ID>] <descript
 Deterministic git operations for the AGNOS process. All artifact IDs are validated before any
 git command is executed. This is the canonical procedure, shared by GitHub Copilot
 (`.github/skills/agnos-git-workflow/`) and Claude Code (`.claude/skills/agnos-git-workflow/`,
-which points here) — see ADR-PRT-001.
+which points here).
 
 ## Script Selection 
 
@@ -22,7 +22,7 @@ Every validation step below runs a `<validate-ids>` script. Select it from `sess
 | `linux` / `macos` | `bash .github/skills/agnos-git-workflow/scripts/validate-ids.sh -Type <T> -Value <V>` |
 
 Use `powershell` (Windows PowerShell 5.1), never `pwsh` — PowerShell 7 is not guaranteed to be
-installed (RQ-PRT-007).
+installed 
 
 ## Sub-Commands
 
