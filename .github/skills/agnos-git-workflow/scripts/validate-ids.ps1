@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Validates AGNOS artifact identifiers before git operations (RQ-GIT-001, RQ-GIT-002).
+  Validates AGNOS artifact identifiers before git operations 
 
 .PARAMETER Type
   The type of ID to validate: 'TRI' | 'TASK' | 'ADR'.
