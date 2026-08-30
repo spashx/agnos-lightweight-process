@@ -1,6 +1,3 @@
-<!-- Implements: RQ-DOC-001, RQ-DOC-002, RQ-DOC-003, RQ-DOC-005, RQ-DOC-006 -->
-<!-- Architecture: ADR-DOC-001 / DEC-DOC-001, DEC-DOC-002, DEC-DOC-003, DEC-DOC-004, DEC-DOC-005 -->
-<!-- Task: TASK-DOC-001 (PLAN-DOC-001) -->
 
 # Getting Started with AGNOS
 

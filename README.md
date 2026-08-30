@@ -136,7 +136,6 @@ Example: `debug_mode: false` (user variable, affects logging)
 
 ## File References
 
-<!-- RQ-DOC-004 / TASK-DOC-002 -->
 - **Worked example (start here)**: [GETTING_STARTED.MD](GETTING_STARTED.MD)
 - **Full instructions**: [.github/instructions/agnos-sw-eng.v2.instructions.md](.github/instructions/agnos-sw-eng.v2.instructions.md)
 - **Claude Code bridge**: [CLAUDE.md](CLAUDE.md)
