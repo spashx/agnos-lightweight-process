@@ -1,6 +1,6 @@
 ---
 name: agnos-git-workflow
-description: "AGNOS process GIT workflow skill. Handles all git operations mandated by the AGNOS process: 'start-session' creates and checks out a feature branch; 'commit-task' stages and commits changes with the correct AGNOS message format. USE FOR: START SESSION step 7 (branch creation) and DoD commit step (task commit). Validates all artifact IDs before executing any git command."
+description: "AGNOS process GIT workflow skill. Handles all git operations mandated by the AGNOS process: 'start-session' creates and checks out a feature branch; 'commit-task' stages and commits changes with the correct AGNOS message format. USE FOR: START SESSION step 8 (branch creation) and DoD commit step (task commit). Validates all artifact IDs before executing any git command."
 argument-hint: "start-session <TRI> | commit-task <TASK-ID> [<ADR-ID>] <description>"
 ---
 
@@ -28,7 +28,7 @@ installed (RQ-PRT-007).
 
 ### `start-session <TRI>` — Feature Branch Creation (RQ-GIT-001)
 
-**When to use**: START SESSION step 7 — at the beginning of every new session.
+**When to use**: START SESSION step 8 — at the beginning of every new session.
 
 **Procedure:**
 

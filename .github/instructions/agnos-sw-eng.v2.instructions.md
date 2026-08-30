@@ -2,7 +2,9 @@
 applyTo: "**"
 ---
 
-# AGNOS SOFTWARE ENGINEERING PROCESS V1 - INSTRUCTIONS
+<!-- AGNOS-PROCESS-INSTANCE: 2026-07-22T23:04:50Z -->
+
+# AGNOS SOFTWARE ENGINEERING PROCESS V2 - INSTRUCTIONS
 
 These instructions describe a lightweight software engineering process for agentic AI development. They are designed to ensure high traceability, maintainability and quality code while enabling rapid iteration and delivery of features.
 
@@ -35,17 +37,20 @@ At the start of every session, run these steps in order before any task:
    - b. **Ask user for `unit_tests`** (user variable): use the built-in user-question tool
      (`askQuestion` on GitHub Copilot, `AskUserQuestion` on Claude Code) — "Should unit tests be
      generated and run in this session? (yes / no)". Set `unit_tests` to `true` or `false`.
-   - c. **Write** `process/_sessionstate/session.yaml` with the resolved values.
-   - d. **Display a summary table** of all variable names and values. Allow the user to override
+   - c. **Ask user for `chat_mode`** (user variable): use the built-in user-question tool —
+     "Chat reporting mode: normal or chat-eco (ultra-concise)?". Set `chat_mode` to `normal` or
+     `chat-eco`.
+   - d. **Write** `process/_sessionstate/session.yaml` with the resolved values.
+   - e. **Display a summary table** of all variable names and values. Allow the user to override
      any value. If any value is overridden, rewrite `session.yaml` before proceeding.
-   - e. **The values in `session.yaml` are the single source of truth for the entire session.**
+   - f. **The values in `session.yaml` are the single source of truth for the entire session.**
      Before starting any Tier M or L task, if session variable values are not in active context,
      read `process/_sessionstate/session.yaml` and reload them before applying any conditional guard.
 4. Scan `process/1.requirements/` for open or unimplemented requirement IDs.
 5. Scan `process/2.architecture/` for existing ADRs to avoid creating duplicates.
 6. Scan `process/3.plan/` for existing plans and tasks to avoid creating duplicates.
 7. MANDATORY: Report ANY semantic CONFLICTS coming from your instructions files. If you find any, STOP and ask the user to clarify which rule to follow. Do NOT proceed until the conflict is resolved.
-8. Create with GIT a new branch for the session by invoking the `agnos-git-workflow` skill's `start-session <TRI>` sub-command, where `<TRI>` is the trigram the user HAS to provide. This branch shall be used for ALL changes in the session, including edits to existing files and creation of new files. If the branch already exists, the skill will ask the user how to proceed.
+8. Create with GIT a new branch for the session by invoking the `agnos-git-workflow` skill's `start-session <TRI>` sub-command, where `<TRI>` is the trigram the user HAS to provide. This branch shall be used for ALL changes in the session, including edits to existing files and creation of new files. If the branch already exists, the skill will ask the user how to proceed. **NEVER work on or commit to the default/protected branch (`main` / `master` / the repository default): every change SHALL be made on the `feature/<TRI>` session branch.**
 
 ## END SESSION ACTION
 
@@ -74,6 +79,19 @@ Features, requirements, ADRs and tasks SHALL be in the format: `<TYPE>-<TRI>-<NN
 - An artifact with no traceable requirement ID is considered incomplete and SHALL NOT be delivered.
 - Always put traceability references into **commments** format , never as plain text.
 
+### MANDATORY DESIGN SYSTEM (UI PROJECTS)
+- Any project with a user interface SHALL define a design system BEFORE implementing the first
+  UI requirement: a single machine-readable source of truth for all visual decisions (colors,
+  spacing, typography, strokes, component metrics), consumable by code as tokens.
+- The design system SHALL be introduced by its own requirement(s) and its own ADR, using the
+  standard ID schema, so it is referenceable like any other artifact.
+- End-to-end traceability: UI-related requirements, ADRs, plan tasks and code SHALL reference
+  the design-system artifact IDs they depend on. A UI artifact that bypasses the design system
+  is considered incomplete and SHALL NOT be delivered (same rule as missing requirement IDs).
+- Deviations from a reference or mockup value SHALL be recorded in the design-system source of
+  truth with a rationale note — never as an inline literal in code.
+- As a starting point, a design-system template is available in `process/1.requirements/design-system-template.md`
+
 ## CONTEXT MANAGEMENT
 
 Long sessions risk filling the AI's context window, causing lost context and degraded output quality. Follow these rules:
@@ -92,6 +110,7 @@ session. The file is tracked in git .
 ```yaml
 unit_tests: true        # boolean — user variable: generate and run unit tests 
 platform: windows       # string — system variable: "windows" | "macos" | "linux" 
+chat_mode: normal       # string — user variable: "normal" | "chat-eco"
 ```
 
 ### Variable Kinds
@@ -99,6 +118,7 @@ platform: windows       # string — system variable: "windows" | "macos" | "lin
 |----------|------|-------------|--------|
 | `unit_tests` | User | Agent asks via the user-question tool (`askQuestion` / `AskUserQuestion`) at every session start | `true` / `false` |
 | `platform` | System | Agent auto-detects via terminal probe at session start | `windows` / `macos` / `linux` |
+| `chat_mode` | User | Agent asks via the user-question tool at every session start | `normal` / `chat-eco` |
 
 ### Adding New Variables
 Add a flat key/value entry to the schema above. Never rename or remove existing keys — add only. Document the kind (user/system), who resolves it, and its allowed values.
@@ -163,6 +183,9 @@ Brief description of the feature's purpose and scope.
 
 ### Traceability in requirements
 - The features and requirements filename, title, and body SHALL reference the requirement ID(s)
+- GUI, UX and user-workflow requirements SHALL express visual values (colors, spacing, sizes,
+  typography) as design-system token references, not raw literals, and SHALL list the
+  design-system RQ/ADR IDs in their **Dependencies** field.
 - Store features and requirements in `process/1.requirements/`.
 
 
@@ -186,6 +209,7 @@ Brief description of the feature's purpose and scope.
   [Mermaid diagram -- required]
   ```
 - Every decision in ADR SHALL have a unique identifier in the format `DEC-<TRI>-<NNN>` (e.g., `DEC-USR-001`), consistent with the universal ID schema, that can be referenced in plans, tasks, and source code.
+- The design system itself SHALL be captured as an ADR (token structure, tiers, generation/verification mechanism). Every subsequent UI-affecting ADR SHALL reference it.
 
 
 ### Traceability in ADRs
@@ -215,6 +239,7 @@ Brief description of the feature's purpose and scope.
 Before marking any task Ready, confirm ALL of the following:
 - [ ] Task has clear description, acceptance criteria (Gherkin), and tier (S/M/L).
 - [ ] Task references the requirement ID(s) and ADR ID(s) it implements.
+- [ ] For UI tasks: the design-system RQ/ADR IDs are listed in the task's references.
 - [ ] PRESENT task to the user and WAIT for explicit approval before starting.
 
 ### DEFINITION OF DONE - DoD (Delivery Checklist)
@@ -226,6 +251,7 @@ The DoD items that apply depend on the task tier. Use the matrix below:
 | Every new artifact references a requirement ID | ✓ | ✓ | ✓ |
 | No string or numeric literal is duplicated inline — all are named constants | — | ✓ | ✓ |
 | No failing test was modified to force it to pass | — | ✓ | ✓ |
+| UI change consumes design-system tokens — no raw visual literal in code | ✓ | ✓ | ✓ |
 | Code compiles and passes static analysis with no errors | ✓ | ✓ | ✓ |
 
 WHEN a task is done, add and commit with GIT all changes into the feature branch by invoking the `agnos-git-workflow` skill's `commit-task <TASK> [<ADR>] <description>` sub-command, where:
@@ -279,10 +305,18 @@ This plan implements the tasks in the format specified below.
 ````
 
 
+### Chat Verbosity
+
+> **WHILE `session.chat_mode = chat-eco`**: all chat replies SHALL be minimal — no restating
+> context, no verbose explanations, results/status only. Tool-call reasoning stays internal.
+> Does NOT reduce rigor of files/commits (DoD, traceability, Gherkin) — chat verbosity only.
+> If `session.chat_mode` is not in active context, read `process/_sessionstate/session.yaml` first.
+
 ## 4. CODE IMPLEMENTATION AND QUALITY
 
 - All generated code SHALL comply with **SOLID** principles (Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion).
 - **No duplicated/magic literals (strings or numbers).** Every constant SHALL be declared as a named class-level or method-level constant. 
+- **UI code**: every visual constant (color, spacing, size, alpha, font metric) SHALL be initialized from design-system tokens. Local named constants MAY alias a token for readability, but SHALL NOT hold a raw visual value.
 - Code SHALL contains traceable references to the requirement ID(s) and ADR decisions ID(s) it implements in the form of comments or docstrings.
 
 
@@ -306,6 +340,9 @@ This plan implements the tasks in the format specified below.
 - Never introduce a new abstraction, helper, or utility for a one-off operation.
 - Never add documentation, comments, or type annotations to code you did not change.
 - Never assume a constant or configuration value -- read the source file first.
+- Never port a raw visual value from a reference implementation, mockup or screenshot directly
+  into UI code. Route it through the design system first (add or alias a token, with a rationale
+  note if it deviates from the reference), then consume the token.
 - Never guess a fix and retry the same failing approach twice. If the first targeted fix fails, stop and report see [PLAN - Agentic Planning and Execution](#3-plan---planning-and-execution) "**Ask when blocking.** " step 4.d.
 - **ALWAYS use `session.platform`** when generating shell commands:
   use PowerShell syntax on `windows`; use bash/zsh syntax on `macos` or `linux`. Never use
