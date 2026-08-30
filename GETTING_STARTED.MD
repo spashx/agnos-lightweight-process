@@ -261,6 +261,8 @@ new ADR.
 | **Pre-generate nightly to object storage** | Instant downloads, trivially cacheable. Rejected: the file is stale by up to 24 h and the team reconciles same-day orders, so it fails RQ-EXP-001's "current list". Adds a bucket and a lifecycle policy. |
 | **Background job + emailed download link** | Handles unbounded sizes and survives client disconnects. Rejected as disproportionate: it adds a queue, a worker and a notification path for a report that streams in ~8 s. |
 
+````
+
 ## Diagram
 
 ```mermaid
@@ -283,7 +285,7 @@ sequenceDiagram
 
     Note over Exp,Repo: peak memory = 1 batch, independent of total rows (RQ-EXP-002)
 ```
-````
+
 
 **Your job here:** read the **Alternatives Considered** table first, not the Decision. If a rejected
 option has no honest upside listed, the agent has written an advocacy document rather than a
