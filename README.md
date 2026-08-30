@@ -1,4 +1,4 @@
-# AGNOS Software Engineering Process v1
+# AGNOS Software Engineering Process v2
 
 **AGNOS** is a lightweight, agentic AI-driven software engineering process designed for high traceability, maintainability, and rapid feature delivery. It enforces a clear workflow from requirements through architecture decisions to implementation, with version-controlled session state.
 
@@ -13,8 +13,8 @@
 
 Every session follows these steps:
 
-1. **Load instructions** — Copilot auto-loads `.github/instructions/agnos-sw-eng.v1.instructions.md`; Claude Code auto-loads the root `CLAUDE.md`, which imports the same file
-2. **Resolve session state** — Detect platform, ask user about unit tests (`askQuestion` on Copilot, `AskUserQuestion` on Claude Code), write `session.yaml`
+1. **Load instructions** — Copilot auto-loads `.github/instructions/agnos-sw-eng.v2.instructions.md`; Claude Code auto-loads the root `CLAUDE.md`, which imports the same file
+2. **Resolve session state** — Detect platform, ask user about unit tests and chat mode (`askQuestion` on Copilot, `AskUserQuestion` on Claude Code), write `session.yaml`
 3. **Scan artifacts** — Check for open requirements, ADRs, and plans
 4. **Create branch** — Use the `agnos-git-workflow` skill's `start-session <TRI>` sub-command
 5. **Execute tasks** — Follow the plan, tier, and delivery checklist
@@ -58,11 +58,13 @@ Stored in `process/_sessionstate/session.yaml`, controlled at session start:
 ```yaml
 unit_tests: true          # User variable: generate/run tests? (affects Testing section)
 platform: windows         # System variable: detect OS (affects shell commands)
+chat_mode: normal         # User variable: "normal" | "chat-eco" (affects chat verbosity)
 ```
 
 **Guard syntax:**
 - `WHILE session.unit_tests = false`: skip all Testing steps
 - `ALWAYS use session.platform`: use platform-specific shell syntax
+- `WHILE session.chat_mode = chat-eco`: keep all chat replies minimal (files and commits keep full rigor)
 
 ### Task Tiers
 
@@ -129,7 +131,7 @@ Example: `debug_mode: false` (user variable, affects logging)
 
 ## File References
 
-- **Full instructions**: [.github/instructions/agnos-sw-eng.v1.instructions.md](.github/instructions/agnos-sw-eng.v1.instructions.md)
+- **Full instructions**: [.github/instructions/agnos-sw-eng.v2.instructions.md](.github/instructions/agnos-sw-eng.v2.instructions.md)
 - **Claude Code bridge**: [CLAUDE.md](CLAUDE.md)
 - **Git workflow skill (canonical)**: [.github/skills/agnos-git-workflow/SKILL.md](.github/skills/agnos-git-workflow/SKILL.md)
 - **Git workflow skill (Claude Code entry point)**: [.claude/skills/agnos-git-workflow/SKILL.md](.claude/skills/agnos-git-workflow/SKILL.md)
@@ -143,4 +145,4 @@ Long sessions degrade output quality. If you exceed 10 tasks in a session:
 
 ---
 
-**Version**: v1 | **Last Updated**: April 9, 2026 | **Process Owner**: AGNOS Team
+**Version**: v2 | **Last Updated**: April 9, 2026 | **Process Owner**: AGNOS Team
