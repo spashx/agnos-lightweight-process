@@ -1,6 +1,7 @@
 # AGNOS Software Engineering Process v2
 
 **AGNOS** is a lightweight, agentic AI-driven software engineering process designed for high traceability, maintainability, and rapid feature delivery. It enforces a clear workflow from requirements through architecture decisions to implementation, with version-controlled session state.
+Nothing to install. Clone the repo and get started in seconds.
 
 ## Supported Tools & Platforms
 
