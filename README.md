@@ -11,6 +11,11 @@
 
 ## Quick Start
 
+<!-- RQ-DOC-004 / TASK-DOC-002: onboarding guide entry point -->
+> **New to AGNOS?** Read **[GETTING_STARTED.MD](GETTING_STARTED.MD)** first — one complete worked
+> session, from branch creation to the closing report, showing what you type at each stage and what
+> the agent produces in return.
+
 Every session follows these steps:
 
 1. **Load instructions** — Copilot auto-loads `.github/instructions/agnos-sw-eng.v2.instructions.md`; Claude Code auto-loads the root `CLAUDE.md`, which imports the same file
@@ -131,6 +136,8 @@ Example: `debug_mode: false` (user variable, affects logging)
 
 ## File References
 
+<!-- RQ-DOC-004 / TASK-DOC-002 -->
+- **Worked example (start here)**: [GETTING_STARTED.MD](GETTING_STARTED.MD)
 - **Full instructions**: [.github/instructions/agnos-sw-eng.v2.instructions.md](.github/instructions/agnos-sw-eng.v2.instructions.md)
 - **Claude Code bridge**: [CLAUDE.md](CLAUDE.md)
 - **Git workflow skill (canonical)**: [.github/skills/agnos-git-workflow/SKILL.md](.github/skills/agnos-git-workflow/SKILL.md)
@@ -145,4 +152,4 @@ Long sessions degrade output quality. If you exceed 10 tasks in a session:
 
 ---
 
-**Version**: v2 | **Last Updated**: April 9, 2026 | **Process Owner**: AGNOS Team
+**Version**: v2 
