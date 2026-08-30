@@ -1,4 +1,4 @@
-# Desktop Application Design System — Reusable Template
+# Application Design System — Reusable Template
 
 *Framework-agnostic design system template. Copy this file into a new project and fill in every*
 *`[...]`. This template is written to be followed literally by an agentic*
