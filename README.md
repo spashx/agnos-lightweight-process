@@ -4,6 +4,8 @@
 
 Nothing to install. Clone the repo and get started in seconds.
 
+![AGNOS v2 Overview](agnosV2-overview.png)
+
 ## Supported Tools & Platforms
 
 | | Supported |
