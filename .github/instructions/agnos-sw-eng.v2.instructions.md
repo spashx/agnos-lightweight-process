@@ -90,7 +90,7 @@ Features, requirements, ADRs and tasks SHALL be in the format: `<TYPE>-<TRI>-<NN
   is considered incomplete and SHALL NOT be delivered (same rule as missing requirement IDs).
 - Deviations from a reference or mockup value SHALL be recorded in the design-system source of
   truth with a rationale note — never as an inline literal in code.
-- As a starting point, a design-system template is available in `process/1.requirements/design-system-template.md`
+- As a starting point, a design-system template is available in `process/1.requirements/design-system-template.md`. As a default implementation, you should propose to persist the design system tokens into a `design-system.yaml` file, and to create a script to generate the design tokens from the `design-system.yaml` file into a target file matching the programming language used by the human.
 
 ## CONTEXT MANAGEMENT
 
@@ -249,8 +249,8 @@ The DoD items that apply depend on the task tier. Use the matrix below:
 | DoD Item | S | M | L |
 |----------|:-:|:-:|:-:|
 | Every new artifact references a requirement ID | ✓ | ✓ | ✓ |
-| No string or numeric literal is duplicated inline — all are named constants | — | ✓ | ✓ |
-| No failing test was modified to force it to pass | — | ✓ | ✓ |
+| No string or numeric literal is duplicated inline — all are named constants | ✓ | ✓ | ✓ |
+| No failing test was modified to force it to pass | ✓ | ✓ | ✓ |
 | UI change consumes design-system tokens — no raw visual literal in code | ✓ | ✓ | ✓ |
 | Code compiles and passes static analysis with no errors | ✓ | ✓ | ✓ |
 
