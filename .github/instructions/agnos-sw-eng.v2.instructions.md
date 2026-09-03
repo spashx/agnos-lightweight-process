@@ -77,7 +77,7 @@ Features, requirements, ADRs and tasks SHALL be in the format: `<TYPE>-<TRI>-<NN
 - Requirement IDs SHALL appear in ALL related artefacts: feature files, ADR files, Plan files, task descriptions, file headers, class/function doc comments, and test case names.
 - The user SHALL be able to grep any requirement ID and find all related code and documentation.
 - An artifact with no traceable requirement ID is considered incomplete and SHALL NOT be delivered.
-- Always put traceability references into **commments** format , never as plain text.
+- Always put traceability references into **comments** format , never as plain text.
 
 ### MANDATORY DESIGN SYSTEM (UI PROJECTS)
 - Any project with a user interface SHALL define a design system BEFORE implementing the first
