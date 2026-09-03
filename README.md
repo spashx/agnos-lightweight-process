@@ -87,8 +87,8 @@ chat_mode: normal         # User variable: "normal" | "chat-eco" (affects chat v
 
 All tasks must:
 - ✓ Reference a requirement ID (S, M, L)
-- ✓ Have no duplicated/magic literals (M, L)
-- ✓ Pass tests (M, L)
+- ✓ Have no duplicated/magic literals (S, M, L)
+- ✓ Pass tests (S, M, L)
 - ✓ Compile without errors (S, M, L)
 
 ## Git Workflow
