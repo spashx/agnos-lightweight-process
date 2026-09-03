@@ -90,7 +90,7 @@ Features, requirements, ADRs and tasks SHALL be in the format: `<TYPE>-<TRI>-<NN
   is considered incomplete and SHALL NOT be delivered (same rule as missing requirement IDs).
 - Deviations from a reference or mockup value SHALL be recorded in the design-system source of
   truth with a rationale note — never as an inline literal in code.
-- As a starting point, a design-system template is available in `process/1.requirements/design-system-template.md`. As a default implementation, you should propose to persist the design system tokens into a `design-system.yaml` file, and to create a script to generate the design tokens from the `design-system.yaml` file into a target file matching the programming language used by the human.
+- As a starting point, a design-system template is available in `process/1.requirements/design-system-template.md`. As a default implementation, you should propose to persist the design system tokens into a `design-system.yaml` file, and then to create a script to convert the design tokens from the `design-system.yaml` file into a target file which format matches the target programming language.
 
 ## CONTEXT MANAGEMENT
 
