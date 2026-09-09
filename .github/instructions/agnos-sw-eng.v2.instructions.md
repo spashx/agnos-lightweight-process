@@ -60,6 +60,9 @@ At the start of every session, run these steps in order before any task:
   - The ADRs created or updated, with their IDs and short titles.
   - The tasks completed, with their IDs, descriptions, and tiers.
   - Any blockers encountered and how they were resolved or escalated.
+  - **Process friction metrics** (RQ-REC-005): a table with 4 fixed counters — AskUserQuestion
+    invocations, Error Recovery Protocol invocations, tasks re-tiered, Verification-caught
+    discrepancies (RQ-REC-001). Report each counter explicitly, including 0; never omit a row.
 
 
 ## MANDATORY RULES FOR ALL ARTIFACTS
