@@ -79,6 +79,10 @@ Features, requirements, ADRs and tasks SHALL be in the format: `<TYPE>-<TRI>-<NN
 - An artifact with no traceable requirement ID is considered incomplete and SHALL NOT be delivered.
 - Always put traceability references into **commments** format , never as plain text.
 
+### MANDATORY INSTRUCTIONS-FILE LINE BUDGET
+- This file (`agnos-sw-eng.v2.instructions.md`) SHALL NOT exceed 800 lines (RQ-REC-003).
+- Any task that edits this file SHALL report its post-edit line count in the task's `Verification` field before being marked Done (DEC-REC-002).
+
 ### MANDATORY DESIGN SYSTEM (UI PROJECTS)
 - Any project with a user interface SHALL define a design system BEFORE implementing the first
   UI requirement: a single machine-readable source of truth for all visual decisions (colors,
@@ -233,7 +237,7 @@ Brief description of the feature's purpose and scope.
 - Everything else: decide and proceed.
 
 5. **No scope creep.** Implement ONLY what was explicitly requested. Do NOT add features, refactor surrounding code, or introduce new abstractions beyond the task scope.
-6. **Self-check before declaring done.** Before ending a task, verify every item in the Delivery Checklist below.
+6. **Self-check before declaring done.** Before ending a task, verify every item in the Delivery Checklist below. For Tier M/L tasks, populate the task's `Verification` field from real tool output re-produced in the current session (a re-run test, a re-read file, a re-run command) for each acceptance criterion — never from recollection of an earlier pass (RQ-REC-001). Record any inference made under rule 4 ("Infer and proceed") in the task's `Assumptions` field, or the literal value `None` if no inference was made (RQ-REC-002).
 
 ### DEFINITION OF READY - DoR (Planning Checklist)
 Before marking any task Ready, confirm ALL of the following:
@@ -302,6 +306,8 @@ This plan implements the tasks in the format specified below.
 - **Acceptance Criteria** (Gherkin; see [§1 format](#1-requirements-authoring)): Given/When/Then
 - **Dependencies**: [List of TASK IDs that must be completed first, or "None"]
 - **Assignee**: [Human | AI]
+- **Verification**: [Tool output evidencing each acceptance criterion, cited at closure per RQ-REC-001; "N/A (Tier S)" for Tier S tasks]
+- **Assumptions**: [Any detail inferred under rule 4 "Infer and proceed" rather than explicitly given by the user, per RQ-REC-002, or "None"]
 ````
 
 
