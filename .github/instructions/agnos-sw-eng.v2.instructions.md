@@ -22,7 +22,8 @@ The whole process artifacts are managed into the `process/` folder of the worksp
 - `process/1.requirements/` – Feature and Requirements files
 - `process/2.architecture/` – Architecture Decision Records (ADRs) files
 - `process/3.plan/` – Plan files with PLAN-* and TASK-* definitions
-- `process/_sessionstate/` – Session state YAML file (`session.yaml`), version-controlled
+- `process/_sessionstate/` – Session state YAML file (`session.yaml`) and the cross-session
+  friction-metrics log (`METRICS_LOG.md`), both version-controlled
  
 ## START SESSION ACTION
 
@@ -63,6 +64,8 @@ At the start of every session, run these steps in order before any task:
   - **Process friction metrics** (RQ-REC-005): a table with 4 fixed counters — AskUserQuestion
     invocations, Error Recovery Protocol invocations, tasks re-tiered, Verification-caught
     discrepancies (RQ-REC-001). Report each counter explicitly, including 0; never omit a row.
+2) **Persist the metrics** (RQ-REC-006): append one row (date, `TRI`, the 4 counters from step 1)
+   to `process/_sessionstate/METRICS_LOG.md`, creating it with its header row first if absent.
 
 
 ## MANDATORY RULES FOR ALL ARTIFACTS
