@@ -66,6 +66,10 @@ At the start of every session, run these steps in order before any task:
     discrepancies (RQ-REC-001). Report each counter explicitly, including 0; never omit a row.
 2) **Persist the metrics** (RQ-REC-006): append one row (date, `TRI`, the 4 counters from step 1)
    to `process/_sessionstate/METRICS_LOG.md`, creating it with its header row first if absent.
+3) **IF** step 1's metrics table has at least one non-zero counter, **propose a recursive
+   self-improvement follow-up** (RQ-REC-009): ask the user for the maximum lines to add to this
+   file, present 1-3 candidate themes each citing the counter(s) that motivate it, and state the
+   resulting number of iterations. Do NOT start implementing until the user confirms.
 
 
 ## MANDATORY RULES FOR ALL ARTIFACTS
@@ -110,6 +114,17 @@ Long sessions risk filling the AI's context window, causing lost context and deg
 2. **Summarize before continuing.** When resuming after a checkpoint, read the latest checkpoint summary before proceeding.
 3. **Limit task batch size.** Do not plan more than 10 tasks in a single session. If a plan exceeds this, split it across sessions with explicit handoff notes.
 4. **Prune intermediate context.** After a task is marked complete and verified, avoid re-reading its implementation details unless debugging a regression.
+
+## RECURSIVE SELF-IMPROVEMENT SESSIONS
+
+WHILE a session explicitly runs numbered iterations to improve this instructions file itself, apply
+these on top of the normal process:
+
+1. **Tag every artifact.** First line of any REQ/ADR/PLAN/TASK file touched: `<!-- Iteration: k/N -->` (RQ-REC-008).
+2. **Tag every commit.** Prefix the commit-task message with a Conventional-Commits type and the `<TRI>` scope — `<type>(<TRI>): <ADR>/<TASK> <description>` — and add an `Iteration: k/N` trailer (RQ-REC-007). This layers on top of, and does not replace, the default commit-task format.
+3. **Budget across the whole effort, not per iteration.** The line ceiling (see MANDATORY INSTRUCTIONS-FILE LINE BUDGET) applies to the total after the last planned iteration. If a later iteration would exceed it, compress content added by an earlier iteration of the SAME effort first — NEVER rewrite content that predates it.
+4. **One theme at a time.** Propose the next iteration's theme and get it confirmed before drafting its artifacts, so each iteration can be informed by the previous one's outcome — unless the user explicitly asks for the full roadmap upfront.
+5. **Conflict check as a post-condition of drafting.** Before presenting a candidate rule for DoR approval, re-apply the semantic-conflict check from START SESSION ACTION step 7 against it, and report any conflict found (RQ-REC-010). This is complementary, not a guarantee that the rule is correct, useful, or aligned with this file's stated purpose — human review at the theme and DoR gates remains the primary safeguard.
 
 ## SESSION STATE VARIABLES
 Session state variables are named key/value pairs persisted in `process/_sessionstate/session.yaml`
@@ -269,7 +284,7 @@ WHEN a task is done, add and commit with GIT all changes into the feature branch
 - `<ADR>` is the unique id of the related ADR, if applicable (e.g. `ADR-USR-001`)
 - `<description>` is a brief summary of changes
 
-The skill validates all artifact IDs before executing and produces the commit message `<ADR>/<TASK> <description>` when an ADR is provided, or `<TASK> <description>` otherwise.
+The skill validates all artifact IDs before executing and produces the commit message `<ADR>/<TASK> <description>` when an ADR is provided, or `<TASK> <description>` otherwise. During a RECURSIVE SELF-IMPROVEMENT SESSION, this message is further prefixed and trailed per RQ-REC-007.
 
 ### TASK TIERS
 

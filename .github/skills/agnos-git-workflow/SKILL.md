@@ -69,6 +69,9 @@ installed (RQ-PRT-007).
 4. Build the commit message:
    - With ADR: `<ADR-ID>/<TASK-ID> <description>`
    - Without ADR: `<TASK-ID> <description>`
+   - **During a RECURSIVE SELF-IMPROVEMENT SESSION** (RQ-REC-007): prefix with
+     `<type>(<TRI>): ` and add an `Iteration: <k>/<N>` trailer, e.g.
+     `docs(REC): ADR-REC-001/TASK-REC-001 <description>` with trailer `Iteration: 1/5`.
 
 5. Confirm the computed commit message with the user:
    > "About to commit: `<message>`. Proceed?"
