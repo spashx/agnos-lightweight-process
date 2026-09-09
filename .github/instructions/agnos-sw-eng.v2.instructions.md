@@ -332,6 +332,7 @@ This plan implements the tasks in the format specified below.
 > If `session.unit_tests` is not in active context, read `process/_sessionstate/session.yaml` first.
 
 - For Tier M and L tasks, every generated function or method SHALL have at least one unit test. Tier S tasks are exempt from this requirement.
+- **Test-first.** For Tier M/L tasks, author the Gherkin-named unit test(s) for the acceptance criteria BEFORE writing the production code they target (RQ-REC-004) — a test written after the code risks merely describing what the code does instead of what it must do.
 - Write all tests and acceptance criteria in **Gherkin format** (Given / When / Then).
 - A function is considered delivered ONLY when ALL of the following conditions are met:
   1. All associated unit tests pass without any modification to the test implementation.

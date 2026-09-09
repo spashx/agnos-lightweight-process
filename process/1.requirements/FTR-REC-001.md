@@ -13,7 +13,7 @@ This is the first of 5 planned recursive self-improvement iterations on
 `.github/instructions/agnos-sw-eng.v2.instructions.md` (see `process/2.architecture/ADR-REC-001.md`).
 
 ## Stakeholders
-- **Owner**: spambox098@free.fr (process owner / session initiator)
+- **Owner**: AGNOS process session owner (this repository)
 - **Consumers**: Any AI agent (Claude Code, GitHub Copilot) executing the AGNOS process in this
   repository, in this and all future sessions
 
