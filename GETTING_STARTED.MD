@@ -5,7 +5,7 @@ One complete session, start to finish, on one small feature — so you can see w
 the agent produces, and how the pieces stay wired together.
 
 > **Precedence.** This guide illustrates the process; it does not define it.
-> [`.github/instructions/agnos-sw-eng.v2.instructions.md`](.github/instructions/agnos-sw-eng.v2.instructions.md)
+> [`.github/instructions/agnos-sw-eng.v3.instructions.md`](.github/instructions/agnos-sw-eng.v3.instructions.md)
 > is normative. Where the two disagree, the instruction file wins. Each stage below names the
 > instruction section it illustrates so you can check it in one hop.
 
@@ -336,6 +336,8 @@ Implements the streaming CSV exporter and exposes it on the orders API.
   - **And** the repository is queried in batches of at most 500
 - **Dependencies**: None
 - **Assignee**: AI
+- **Verification**: Not yet run — task not started
+- **Assumptions**: None
 
 ### TASK-EXP-002: Expose GET /orders/export
 - **Tier**: S
@@ -350,6 +352,8 @@ Implements the streaming CSV exporter and exposes it on the orders API.
   - **And** `Content-Disposition: attachment; filename="orders.csv"`
 - **Dependencies**: TASK-EXP-001
 - **Assignee**: AI
+- **Verification**: Not yet run — task not started
+- **Assumptions**: None
 ````
 
 ### The tier decides how much ceremony applies
@@ -382,6 +386,11 @@ criteria as the contract they are — anything not written there will not be bui
 ## Stage 5 — Implement
 
 > Illustrates instruction section **4. CODE IMPLEMENTATION AND QUALITY**.
+
+> **Test-first, in practice.** TASK-EXP-001 is Tier M, so the agent actually authors the Gherkin
+> test in Stage 6 *before* this implementation — writing the test after the code risks describing
+> what the code does instead of what it must do. The stages are presented implementation-first here
+> for readability; the authoring order the agent follows is reversed.
 
 **You type:**
 
@@ -576,16 +585,19 @@ commit-task TASK-EXP-001 ADR-EXP-001 add streaming CSV order exporter
 ```
 
 The skill validates `TASK-EXP-001` against `^TASK-[A-Z]{3}-\d{3}$` and `ADR-EXP-001` against
-`^ADR-[A-Z]{3}-\d{3}$` **before** touching git, builds the message, shows it to you for
-confirmation, then runs `git add .` and `git commit`.
+`^ADR-[A-Z]{3}-\d{3}$` **before** touching git, infers a Conventional-Commits `<type>` from the
+nature of the change, builds the message, shows it to you for confirmation, then runs `git add .`
+and `git commit`.
 
 **Resulting commit message:**
 
 ```text
-ADR-EXP-001/TASK-EXP-001 add streaming CSV order exporter
+feat(EXP): ADR-EXP-001/TASK-EXP-001 add streaming CSV order exporter
 ```
 
-Without an ADR it would be `TASK-EXP-002 expose GET /orders/export`.
+Without an ADR it would be `feat(EXP): TASK-EXP-002 expose GET /orders/export`. The `<type>` is
+inferred by the agent (`feat`, `fix`, `docs`, `refactor`, `test`, ...) — you are only asked if it is
+genuinely ambiguous.
 
 > **`git add .` stages everything in the working tree.** If you have unrelated work in progress,
 > commit or stash it before a task commit, or it lands under this task's ID and the commit stops
@@ -629,10 +641,21 @@ Blockers
   TASK-EXP-002 deferred: the endpoint needs an authorisation decision that is out of
   scope for FTR-EXP-001. Carry into the next session; consider an ADR for the
   back-office authorisation model.
+
+Process friction metrics
+  AskUserQuestion            0
+  Error Recovery Protocol    0
+  Tasks re-tiered            0
+  Verification catches       0
 ```
 
 **Your job here:** the summary is a hand-off note to your future self. Check that deferred work is
 named with its ID and its reason — that is what the next session picks up.
+
+The 4-counter table is appended as one row to `process/_sessionstate/METRICS_LOG.md` (created with
+its header if this is the first session to close). Every counter is shown even at 0 — a row is
+never omitted. Had any counter come back non-zero, the agent would also propose a follow-up
+improvement to the instructions file here, and wait for your confirmation before drafting anything.
 
 > **Long sessions:** past ~10 tasks, or when replies start losing earlier context, the agent writes
 > a checkpoint to `process/3.plan/CHECKPOINT-EXP-001.md` (completed IDs, open IDs, blockers, key
@@ -653,7 +676,7 @@ One row per stage. This is the whole human side of a session.
 | 4. Plan | `Plan the implementation of FTR-EXP-001.` | `PLAN-EXP-001.md`, then a **wait** for your approval |
 | 5. Implement | `TASK-EXP-001 approved. Implement it.` | Source with ID comments, named constants |
 | 6. Test | `Run the tests.` | Gherkin-named tests, run under `session.platform` |
-| 7. Commit | *(agent proposes)* `commit-task TASK-EXP-001 ADR-EXP-001 <description>` | `ADR-EXP-001/TASK-EXP-001 <description>` |
+| 7. Commit | *(agent proposes)* `commit-task TASK-EXP-001 ADR-EXP-001 <description>` | `feat(EXP): ADR-EXP-001/TASK-EXP-001 <description>` |
 | 8. Close | `End of session.` | Summary report with deferred work and blockers |
 
 Corrections at any point are just sentences: *"RQ-EXP-002 should be 20 MB, not 50."* —
@@ -702,7 +725,7 @@ artifact with no requirement ID.
 
 ## Where to go next
 
-- **The rules themselves** — [`.github/instructions/agnos-sw-eng.v2.instructions.md`](.github/instructions/agnos-sw-eng.v2.instructions.md) (normative)
+- **The rules themselves** — [`.github/instructions/agnos-sw-eng.v3.instructions.md`](.github/instructions/agnos-sw-eng.v3.instructions.md) (normative)
 - **Reference sheet** — [`README.md`](README.md): ID schema, tiers, DoD, session variables
 - **Templates** — the file templates in the instruction file's sections 1, 2 and 3
 - **Design system** — [`process/1.requirements/design-system-template.md`](process/1.requirements/design-system-template.md)

@@ -1,6 +1,15 @@
-# AGNOS Software Engineering Process v2
+# AGNOS Software Engineering Process v3
+
+<!-- README-VERSION: v3 - 2026-09-11T23:06:46Z -->
 
 **AGNOS** is a lightweight, agentic AI-driven software engineering process designed for high traceability, maintainability, and rapid feature delivery. It enforces a clear workflow from requirements through architecture decisions to implementation, with version-controlled session state.
+
+![AGNOS overview](agnos-overview.png)
+
+> This README orients a human reader. It is not normative and does not replace the instructions
+> file — an AI agent executing the process reads
+> [`.github/instructions/agnos-sw-eng.v3.instructions.md`](.github/instructions/agnos-sw-eng.v3.instructions.md),
+> not this page.
 
 ## Supported Tools & Platforms
 
@@ -11,20 +20,20 @@
 
 ## Quick Start
 
-<!-- RQ-DOC-004 / TASK-DOC-002: onboarding guide entry point -->
+
 > **New to AGNOS?** Read **[GETTING_STARTED.MD](GETTING_STARTED.MD)** first — one complete worked
 > session, from branch creation to the closing report, showing what you type at each stage and what
 > the agent produces in return.
 
 Every session follows these steps:
 
-1. **Load instructions** — Copilot auto-loads `.github/instructions/agnos-sw-eng.v2.instructions.md`; Claude Code auto-loads the root `CLAUDE.md`, which imports the same file
+1. **Load instructions** — Copilot auto-loads `.github/instructions/agnos-sw-eng.v3.instructions.md`; Claude Code auto-loads the root `CLAUDE.md`, which imports the same file
 2. **Resolve session state** — Detect platform, ask user about unit tests and chat mode (`askQuestion` on Copilot, `AskUserQuestion` on Claude Code), write `session.yaml`
 3. **Scan artifacts** — Check for open requirements, ADRs, and plans
 4. **Create branch** — Use the `agnos-git-workflow` skill's `start-session <TRI>` sub-command
-5. **Execute tasks** — Follow the plan, tier, and delivery checklist
-6. **Commit with skill** — Use the `agnos-git-workflow` skill's `commit-task` sub-command with proper IDs
-7. **Close session** — Generate a summary report
+5. **Execute tasks** — Follow the plan, tier, and delivery checklist; Tier M/L tasks are test-first and record `Verification`/`Assumptions` evidence
+6. **Commit with skill** — Use the `agnos-git-workflow` skill's `commit-task` sub-command — it computes the full Conventional-Commits message (type, scope, IDs) for you
+7. **Close session** — Generate a summary report, including the session's process-friction metrics
 
 ## Folder Structure
 
@@ -33,7 +42,7 @@ process/
 ├── 1.requirements/          # FTR-* features and RQ-* requirements (EARS format)
 ├── 2.architecture/          # ADR-* architecture decision records (Mermaid diagrams required)
 ├── 3.plan/                  # PLAN-* plans and TASK-* tasks (Gherkin acceptance criteria)
-└── _sessionstate/           # session.yaml (version-controlled session variables)
+└── _sessionstate/           # session.yaml (session variables) + METRICS_LOG.md (friction metrics), both version-controlled
 ```
 
 ## Key Concepts
@@ -87,6 +96,28 @@ All tasks must:
 - ✓ Pass tests (M, L)
 - ✓ Compile without errors (S, M, L)
 
+### Task Verification, Assumptions & Test-First
+
+Every Tier M/L task carries two closure fields, filled in from real evidence produced in the
+session — never from memory:
+- **Verification**: the tool output (a re-run test, a re-read file, a command's exit code) that
+  proves each acceptance criterion, cited before the task is marked Done.
+- **Assumptions**: any detail the agent inferred under "infer and proceed" rather than one you
+  gave explicitly, or `None`.
+
+For Tier M/L tasks, the Gherkin-named test(s) are written **before** the production code they
+target — a test written after the code risks describing what the code does instead of what it
+must do.
+
+### Process Friction Metrics
+
+At session close, the agent reports 4 counters (AskUserQuestion invocations, Error Recovery
+Protocol invocations, tasks re-tiered, Verification-caught discrepancies) and appends one row to
+`process/_sessionstate/METRICS_LOG.md` — a small, version-controlled, cross-session log. If any
+counter is non-zero, the agent proposes a follow-up improvement to the instructions file (a line
+budget, 1-3 candidate themes, the resulting iteration count) and waits for your confirmation
+before touching anything.
+
 ## Git Workflow
 
 The **`agnos-git-workflow`** skill automates deterministic git operations, with the same canonical
@@ -100,15 +131,26 @@ start-session <TRI>
 commit-task <TASK> [<ADR>] <description>
 ```
 
-Commit messages:
-- With ADR: `ADR-USR-001/TASK-USR-001 add login handler`
-- Without ADR: `TASK-USR-002 add logout handler`
+Commit messages are Conventional-Commits — the skill infers `<type>` and parses `<TRI>` out of the
+task ID, so you never type them yourself (see the skill's `commit-task` procedure for the exact
+grammar):
+- With ADR: `feat(USR): ADR-USR-001/TASK-USR-001 add login handler`
+- Without ADR: `feat(USR): TASK-USR-002 add logout handler`
+- During a recursive self-improvement session, an `Iteration: <k>/<N>` trailer is appended.
 
 Artifact-ID validation runs a script chosen from `session.platform`:
 - `windows` → `powershell -NoProfile -File .github/skills/agnos-git-workflow/scripts/validate-ids.ps1` (Windows PowerShell 5.1 — not `pwsh`)
 - `linux` / `macos` → `bash .github/skills/agnos-git-workflow/scripts/validate-ids.sh`
 
 Both scripts enforce identical `TRI`/`TASK`/`ADR` patterns and are kept exit-code-equivalent.
+
+## Recursive Self-Improvement Sessions
+
+A special session mode for evolving the instructions file itself, run as numbered iterations
+(`1/N`, `2/N`, ...): one theme confirmed at a time, the 800-line budget tracked across the whole
+effort rather than per iteration, an `Iteration: k/N` commit trailer, and a mandatory
+semantic-conflict re-check before any new rule is proposed for approval. Triggered explicitly by
+you — the agent never enters this mode on its own.
 
 ## Best Practices
 
@@ -137,7 +179,7 @@ Example: `debug_mode: false` (user variable, affects logging)
 ## File References
 
 - **Worked example (start here)**: [GETTING_STARTED.MD](GETTING_STARTED.MD)
-- **Full instructions**: [.github/instructions/agnos-sw-eng.v2.instructions.md](.github/instructions/agnos-sw-eng.v2.instructions.md)
+- **Full instructions**: [.github/instructions/agnos-sw-eng.v3.instructions.md](.github/instructions/agnos-sw-eng.v3.instructions.md)
 - **Claude Code bridge**: [CLAUDE.md](CLAUDE.md)
 - **Git workflow skill (canonical)**: [.github/skills/agnos-git-workflow/SKILL.md](.github/skills/agnos-git-workflow/SKILL.md)
 - **Git workflow skill (Claude Code entry point)**: [.claude/skills/agnos-git-workflow/SKILL.md](.claude/skills/agnos-git-workflow/SKILL.md)
@@ -151,4 +193,4 @@ Long sessions degrade output quality. If you exceed 10 tasks in a session:
 
 ---
 
-**Version**: v2 
+**Version**: v3

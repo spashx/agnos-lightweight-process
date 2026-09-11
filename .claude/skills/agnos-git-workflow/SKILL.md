@@ -7,7 +7,7 @@ argument-hint: "start-session <TRI> | commit-task <TASK-ID> [<ADR-ID>] <descript
 # AGNOS Git Workflow (Claude Code entry point)
 
 This is a thin pointer, kept in sync with the canonical procedure so the AGNOS process has a
-single source of truth (RQ-PRT-004). Read and follow the full procedure — sub-commands
+single source of truth. Read and follow the full procedure — sub-commands
 `start-session <TRI>` and `commit-task <TASK-ID> [<ADR-ID>] <description>`, ID validation, and
 platform-aware script dispatch — at:
 

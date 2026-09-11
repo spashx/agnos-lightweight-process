@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Validates AGNOS artifact identifiers before git operations (RQ-GIT-001, RQ-GIT-002, RQ-PRT-005).
+# Validates AGNOS artifact identifiers before git operations 
 # Usage: validate-ids.sh -Type <TRI|TASK|ADR> -Value <value>
 # Exits 0 on success (no output). Exits 1 with a human-readable error on stderr on failure.
 set -u

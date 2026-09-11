@@ -4,7 +4,7 @@ applyTo: "**"
 
 <!-- AGNOS-PROCESS-INSTANCE: 2026-07-22T23:04:50Z -->
 
-# AGNOS SOFTWARE ENGINEERING PROCESS V2 - INSTRUCTIONS
+# AGNOS SOFTWARE ENGINEERING PROCESS V3 - INSTRUCTIONS
 
 These instructions describe a lightweight software engineering process for agentic AI development. They are designed to ensure high traceability, maintainability and quality code while enabling rapid iteration and delivery of features.
 
@@ -22,8 +22,7 @@ The whole process artifacts are managed into the `process/` folder of the worksp
 - `process/1.requirements/` – Feature and Requirements files
 - `process/2.architecture/` – Architecture Decision Records (ADRs) files
 - `process/3.plan/` – Plan files with PLAN-* and TASK-* definitions
-- `process/_sessionstate/` – Session state YAML file (`session.yaml`) and the cross-session
-  friction-metrics log (`METRICS_LOG.md`), both version-controlled
+- `process/_sessionstate/` – Session state YAML file (`session.yaml`) and the cross-session friction-metrics log (`METRICS_LOG.md`), both version-controlled
  
 ## START SESSION ACTION
 
@@ -61,15 +60,18 @@ At the start of every session, run these steps in order before any task:
   - The ADRs created or updated, with their IDs and short titles.
   - The tasks completed, with their IDs, descriptions, and tiers.
   - Any blockers encountered and how they were resolved or escalated.
-  - **Process friction metrics** (RQ-REC-005): a table with 4 fixed counters — AskUserQuestion
+  - **Process friction metrics**: a table with 4 fixed counters — AskUserQuestion
     invocations, Error Recovery Protocol invocations, tasks re-tiered, Verification-caught
-    discrepancies (RQ-REC-001). Report each counter explicitly, including 0; never omit a row.
-2) **Persist the metrics** (RQ-REC-006): append one row (date, `TRI`, the 4 counters from step 1)
+    discrepancies. Report each counter explicitly, including 0; never omit a row.
+
+2) **Persist the metrics**: append one row (date, `TRI`, the 4 counters from step 1)
    to `process/_sessionstate/METRICS_LOG.md`, creating it with its header row first if absent.
+
 3) **IF** step 1's metrics table has at least one non-zero counter, **propose a recursive
-   self-improvement follow-up** (RQ-REC-009): ask the user for the maximum lines to add to this
+   self-improvement follow-up**: ask the user for the maximum lines to add to this
    file, present 1-3 candidate themes each citing the counter(s) that motivate it, and state the
    resulting number of iterations. Do NOT start implementing until the user confirms.
+
 
 
 ## MANDATORY RULES FOR ALL ARTIFACTS
@@ -90,8 +92,8 @@ Features, requirements, ADRs and tasks SHALL be in the format: `<TYPE>-<TRI>-<NN
 - Always put traceability references into **commments** format , never as plain text.
 
 ### MANDATORY INSTRUCTIONS-FILE LINE BUDGET
-- This file (`agnos-sw-eng.v2.instructions.md`) SHALL NOT exceed 800 lines (RQ-REC-003).
-- Any task that edits this file SHALL report its post-edit line count in the task's `Verification` field before being marked Done (DEC-REC-002).
+- This file (`agnos-sw-eng.v3.instructions.md`) SHALL NOT exceed 800 lines.
+- Any task that edits this file SHALL report its post-edit line count in the task's `Verification` field before being marked Done.
 
 ### MANDATORY DESIGN SYSTEM (UI PROJECTS)
 - Any project with a user interface SHALL define a design system BEFORE implementing the first
@@ -120,11 +122,12 @@ Long sessions risk filling the AI's context window, causing lost context and deg
 WHILE a session explicitly runs numbered iterations to improve this instructions file itself, apply
 these on top of the normal process:
 
-1. **Tag every artifact.** First line of any REQ/ADR/PLAN/TASK file touched: `<!-- Iteration: k/N -->` (RQ-REC-008).
-2. **Tag every commit.** Prefix the commit-task message with a Conventional-Commits type and the `<TRI>` scope — `<type>(<TRI>): <ADR>/<TASK> <description>` — and add an `Iteration: k/N` trailer (RQ-REC-007). This layers on top of, and does not replace, the default commit-task format.
-3. **Budget across the whole effort, not per iteration.** The line ceiling (see MANDATORY INSTRUCTIONS-FILE LINE BUDGET) applies to the total after the last planned iteration. If a later iteration would exceed it, compress content added by an earlier iteration of the SAME effort first — NEVER rewrite content that predates it.
-4. **One theme at a time.** Propose the next iteration's theme and get it confirmed before drafting its artifacts, so each iteration can be informed by the previous one's outcome — unless the user explicitly asks for the full roadmap upfront.
-5. **Conflict check as a post-condition of drafting.** Before presenting a candidate rule for DoR approval, re-apply the semantic-conflict check from START SESSION ACTION step 7 against it, and report any conflict found (RQ-REC-010). This is complementary, not a guarantee that the rule is correct, useful, or aligned with this file's stated purpose — human review at the theme and DoR gates remains the primary safeguard.
+
+1. **Tag every commit.** See the `agnos-git-workflow` skill's `commit-task` procedure for the exact
+   commit-message format, including the `Iteration: k/N` trailer it appends during this kind of session.
+2. **Budget across the whole effort, not per iteration.** The line ceiling (see MANDATORY INSTRUCTIONS-FILE LINE BUDGET) applies to the total after the last planned iteration. If a later iteration would exceed it, compress content added by an earlier iteration of the SAME effort first — NEVER rewrite content that predates it.
+3. **One theme at a time.** Propose the next iteration's theme and get it confirmed before drafting its artifacts, so each iteration can be informed by the previous one's outcome — unless the user explicitly asks for the full roadmap upfront.
+4. **Conflict check as a post-condition of drafting.** Before presenting a candidate rule for DoR approval, re-apply the semantic-conflict check from START SESSION ACTION step 7 against it, and report any conflict found. This is complementary, not a guarantee that the rule is correct, useful, or aligned with this file's stated purpose — human review at the theme and DoR gates remains the primary safeguard.
 
 ## SESSION STATE VARIABLES
 Session state variables are named key/value pairs persisted in `process/_sessionstate/session.yaml`
@@ -258,7 +261,7 @@ Brief description of the feature's purpose and scope.
 - Everything else: decide and proceed.
 
 5. **No scope creep.** Implement ONLY what was explicitly requested. Do NOT add features, refactor surrounding code, or introduce new abstractions beyond the task scope.
-6. **Self-check before declaring done.** Before ending a task, verify every item in the Delivery Checklist below. For Tier M/L tasks, populate the task's `Verification` field from real tool output re-produced in the current session (a re-run test, a re-read file, a re-run command) for each acceptance criterion — never from recollection of an earlier pass (RQ-REC-001). Record any inference made under rule 4 ("Infer and proceed") in the task's `Assumptions` field, or the literal value `None` if no inference was made (RQ-REC-002).
+6. **Self-check before declaring done.** Before ending a task, verify every item in the Delivery Checklist below. For Tier M/L tasks, populate the task's `Verification` field from real tool output re-produced in the current session (a re-run test, a re-read file, a re-run command) for each acceptance criterion — never from recollection of an earlier pass. Record any inference made under rule 4 ("Infer and proceed") in the task's `Assumptions` field, or the literal value `None` if no inference was made. 
 
 ### DEFINITION OF READY - DoR (Planning Checklist)
 Before marking any task Ready, confirm ALL of the following:
@@ -284,7 +287,7 @@ WHEN a task is done, add and commit with GIT all changes into the feature branch
 - `<ADR>` is the unique id of the related ADR, if applicable (e.g. `ADR-USR-001`)
 - `<description>` is a brief summary of changes
 
-The skill validates all artifact IDs before executing and produces the commit message `<ADR>/<TASK> <description>` when an ADR is provided, or `<TASK> <description>` otherwise. During a RECURSIVE SELF-IMPROVEMENT SESSION, this message is further prefixed and trailed per RQ-REC-007.
+The skill validates all artifact IDs and computes the full commit message — see that skill for the exact format.
 
 ### TASK TIERS
 
@@ -300,6 +303,7 @@ Tag every task with a tier before starting. The tier determines which steps are 
 - A Tier S task that unexpectedly requires a new file SHALL be re-tiered to M or L before continuing.
 
 ### Plan/Task File Template
+
 
 Every plan file in `process/3.plan/` SHALL follow this structure:
 
@@ -327,8 +331,8 @@ This plan implements the tasks in the format specified below.
 - **Acceptance Criteria** (Gherkin; see [§1 format](#1-requirements-authoring)): Given/When/Then
 - **Dependencies**: [List of TASK IDs that must be completed first, or "None"]
 - **Assignee**: [Human | AI]
-- **Verification**: [Tool output evidencing each acceptance criterion, cited at closure per RQ-REC-001; "N/A (Tier S)" for Tier S tasks]
-- **Assumptions**: [Any detail inferred under rule 4 "Infer and proceed" rather than explicitly given by the user, per RQ-REC-002, or "None"]
+- **Verification**: [Tool output evidencing each acceptance criterion, cited at closure; "N/A (Tier S)" for Tier S tasks]
+- **Assumptions**: [Any detail inferred under rule 4 "Infer and proceed" rather than explicitly given by the user, or "None"]
 ````
 
 
@@ -353,7 +357,7 @@ This plan implements the tasks in the format specified below.
 > If `session.unit_tests` is not in active context, read `process/_sessionstate/session.yaml` first.
 
 - For Tier M and L tasks, every generated function or method SHALL have at least one unit test. Tier S tasks are exempt from this requirement.
-- **Test-first.** For Tier M/L tasks, author the Gherkin-named unit test(s) for the acceptance criteria BEFORE writing the production code they target (RQ-REC-004) — a test written after the code risks merely describing what the code does instead of what it must do.
+- **Test-first.** For Tier M/L tasks, author the Gherkin-named unit test(s) for the acceptance criteria BEFORE writing the production code they target — a test written after the code risks merely describing what the code does instead of what it must do. 
 - Write all tests and acceptance criteria in **Gherkin format** (Given / When / Then).
 - A function is considered delivered ONLY when ALL of the following conditions are met:
   1. All associated unit tests pass without any modification to the test implementation.

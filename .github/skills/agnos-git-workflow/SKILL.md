@@ -9,9 +9,9 @@ argument-hint: "start-session <TRI> | commit-task <TASK-ID> [<ADR-ID>] <descript
 Deterministic git operations for the AGNOS process. All artifact IDs are validated before any
 git command is executed. This is the canonical procedure, shared by GitHub Copilot
 (`.github/skills/agnos-git-workflow/`) and Claude Code (`.claude/skills/agnos-git-workflow/`,
-which points here) — see ADR-PRT-001.
+which points here). 
 
-## Script Selection (RQ-PRT-006)
+## Script Selection
 
 Every validation step below runs a `<validate-ids>` script. Select it from `session.platform`
 (read `process/_sessionstate/session.yaml` first if not already in context):
@@ -22,11 +22,11 @@ Every validation step below runs a `<validate-ids>` script. Select it from `sess
 | `linux` / `macos` | `bash .github/skills/agnos-git-workflow/scripts/validate-ids.sh -Type <T> -Value <V>` |
 
 Use `powershell` (Windows PowerShell 5.1), never `pwsh` — PowerShell 7 is not guaranteed to be
-installed (RQ-PRT-007).
+installed.
 
 ## Sub-Commands
 
-### `start-session <TRI>` — Feature Branch Creation (RQ-GIT-001)
+### `start-session <TRI>` — Feature Branch Creation
 
 **When to use**: START SESSION step 8 — at the beginning of every new session.
 
@@ -49,9 +49,19 @@ installed (RQ-PRT-007).
 
 ---
 
-### `commit-task <TASK-ID> [<ADR-ID>] <description>` — Task Commit (RQ-GIT-002)
+### `commit-task <TASK-ID> [<ADR-ID>] <description>` — Task Commit
 
 **When to use**: DoD commit step — when a task is marked Done.
+
+**Commit message format** (single source of truth for the AGNOS commit-message grammar — do not
+restate this elsewhere): `<type>(<TRI>): <ADR-ID>/<TASK-ID> <description>` when an ADR-ID was
+given, otherwise `<type>(<TRI>): <TASK-ID> <description>`, where:
+- `<type>` is a Conventional-Commits type (`feat` | `fix` | `docs` | `refactor` | `test` |
+  `chore` | `perf` | `build` | `ci` | `style`) inferred from the nature of the change — do not
+  ask the user unless genuinely ambiguous.
+- `<TRI>` is the trigram parsed out of `<TASK-ID>`.
+- **During a RECURSIVE SELF-IMPROVEMENT SESSION**: append an `Iteration: <k>/<N>` trailer, e.g.
+  `docs(USR): ADR-USR-001/TASK-USR-001 <description>` with trailer `Iteration: 1/5`.
 
 **Procedure:**
 
@@ -66,12 +76,7 @@ installed (RQ-PRT-007).
 3. If ADR-ID was provided, validate it using `<validate-ids>` with `-Type ADR -Value <ADR-ID>`.
    If exit code ≠ 0: report the error and STOP.
 
-4. Build the commit message:
-   - With ADR: `<ADR-ID>/<TASK-ID> <description>`
-   - Without ADR: `<TASK-ID> <description>`
-   - **During a RECURSIVE SELF-IMPROVEMENT SESSION** (RQ-REC-007): prefix with
-     `<type>(<TRI>): ` and add an `Iteration: <k>/<N>` trailer, e.g.
-     `docs(REC): ADR-REC-001/TASK-REC-001 <description>` with trailer `Iteration: 1/5`.
+4. Determine `<type>` and build the commit message per the format above.
 
 5. Confirm the computed commit message with the user:
    > "About to commit: `<message>`. Proceed?"
