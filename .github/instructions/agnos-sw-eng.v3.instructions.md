@@ -277,8 +277,8 @@ The DoD items that apply depend on the task tier. Use the matrix below:
 | DoD Item | S | M | L |
 |----------|:-:|:-:|:-:|
 | Every new artifact references a requirement ID | ✓ | ✓ | ✓ |
-| No string or numeric literal is duplicated inline — all are named constants | — | ✓ | ✓ |
-| No failing test was modified to force it to pass | — | ✓ | ✓ |
+| No string or numeric literal is duplicated inline — all are named constants |✓ | ✓ | ✓ |
+| No failing test was modified to force it to pass | ✓ | ✓ | ✓ |
 | UI change consumes design-system tokens — no raw visual literal in code | ✓ | ✓ | ✓ |
 | Code compiles and passes static analysis with no errors | ✓ | ✓ | ✓ |
 
