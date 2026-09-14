@@ -1,6 +1,6 @@
 # AGNOS Process — Claude Code Entry Point
 
-@.github/instructions/agnos-sw-eng.v3.instructions.md
+@.github/instructions/agnos-sw-eng.instructions.md
 
 ## Tool Mapping (Claude Code)
 

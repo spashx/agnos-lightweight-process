@@ -92,7 +92,7 @@ Features, requirements, ADRs and tasks SHALL be in the format: `<TYPE>-<TRI>-<NN
 - Always put traceability references into **commments** format , never as plain text.
 
 ### MANDATORY INSTRUCTIONS-FILE LINE BUDGET
-- This file (`agnos-sw-eng.v3.instructions.md`) SHALL NOT exceed 800 lines.
+- This file (`agnos-sw-eng.instructions.md`) SHALL NOT exceed 800 lines.
 - Any task that edits this file SHALL report its post-edit line count in the task's `Verification` field before being marked Done.
 
 ### MANDATORY DESIGN SYSTEM (UI PROJECTS)

@@ -43,7 +43,7 @@ diff.
       artifact).
 - [ ] No duplicated/magic literal was introduced without a named constant.
 - [ ] Tests pass, and none were edited just to force a pass.
-- [ ] If `.github/instructions/agnos-sw-eng.v3.instructions.md` was touched: post-edit line count
+- [ ] If `.github/instructions/agnos-sw-eng.instructions.md` was touched: post-edit line count
       is ≤ 800 — state it here: `___ lines`.
 - [ ] If both `.github/` and `.claude/` copies of a skill exist, they were kept in sync (or the
       `.claude/` side remains a thin pointer, unchanged).

@@ -11,7 +11,7 @@ By participating, you agree to abide by the [Code of Conduct](CODE_OF_CONDUCT.md
 ## What you can contribute
 
 - **Process changes** — edits to
-  [`.github/instructions/agnos-sw-eng.v3.instructions.md`](.github/instructions/agnos-sw-eng.v3.instructions.md),
+  [`.github/instructions/agnos-sw-eng.instructions.md`](.github/instructions/agnos-sw-eng.instructions.md),
   the `agnos-git-workflow` skill, or the requirement/ADR/plan templates.
 - **Documentation** — `README.md`, `GETTING_STARTED.MD`, this file, or comments inside the
   templates.
@@ -25,7 +25,7 @@ By participating, you agree to abide by the [Code of Conduct](CODE_OF_CONDUCT.md
 2. **Keep the two entry points in sync.** GitHub Copilot and Claude Code share one canonical
    instruction file and one canonical `agnos-git-workflow/SKILL.md` under `.github/`; the
    `.claude/` copies are thin pointers. Don't fork the content between them.
-3. **Respect the instructions-file line budget.** `agnos-sw-eng.v3.instructions.md` must stay at or
+3. **Respect the instructions-file line budget.** `agnos-sw-eng.instructions.md` must stay at or
    under 800 lines. If your change would exceed it, trim an existing section in the same change
    rather than deferring cleanup.
 4. **Traceability stays in comments, not prose.** If you reference a requirement, ADR, or decision

@@ -8,7 +8,7 @@
 
 > This README orients a human reader. It is not normative and does not replace the instructions
 > file — an AI agent executing the process reads
-> [`.github/instructions/agnos-sw-eng.v3.instructions.md`](.github/instructions/agnos-sw-eng.v3.instructions.md),
+> [`.github/instructions/agnos-sw-eng.instructions.md`](.github/instructions/agnos-sw-eng.instructions.md),
 > not this page.
 
 ## Supported Tools & Platforms
@@ -27,7 +27,7 @@
 
 Every session follows these steps:
 
-1. **Load instructions** — Copilot auto-loads `.github/instructions/agnos-sw-eng.v3.instructions.md`; Claude Code auto-loads the root `CLAUDE.md`, which imports the same file
+1. **Load instructions** — Copilot auto-loads `.github/instructions/agnos-sw-eng.instructions.md`; Claude Code auto-loads the root `CLAUDE.md`, which imports the same file
 2. **Resolve session state** — Detect platform, ask user about unit tests and chat mode (`askQuestion` on Copilot, `AskUserQuestion` on Claude Code), write `session.yaml`
 3. **Scan artifacts** — Check for open requirements, ADRs, and plans
 4. **Create branch** — Use the `agnos-git-workflow` skill's `start-session <TRI>` sub-command
@@ -179,7 +179,7 @@ Example: `debug_mode: false` (user variable, affects logging)
 ## File References
 
 - **Worked example (start here)**: [GETTING_STARTED.MD](GETTING_STARTED.MD)
-- **Full instructions**: [.github/instructions/agnos-sw-eng.v3.instructions.md](.github/instructions/agnos-sw-eng.v3.instructions.md)
+- **Full instructions**: [.github/instructions/agnos-sw-eng.instructions.md](.github/instructions/agnos-sw-eng.instructions.md)
 - **Claude Code bridge**: [CLAUDE.md](CLAUDE.md)
 - **Git workflow skill (canonical)**: [.github/skills/agnos-git-workflow/SKILL.md](.github/skills/agnos-git-workflow/SKILL.md)
 - **Git workflow skill (Claude Code entry point)**: [.claude/skills/agnos-git-workflow/SKILL.md](.claude/skills/agnos-git-workflow/SKILL.md)

@@ -7,7 +7,7 @@ service. "Version" refers to the instructions file revision.
 
 | Version | Supported |
 | ------- | --------- |
-| v3 (`agnos-sw-eng.v3.instructions.md`) | :white_check_mark: |
+| v3 (`agnos-sw-eng.instructions.md`) | :white_check_mark: |
 | v2 and earlier | :x: (superseded, no fixes) |
 
 ## Reporting a Vulnerability
@@ -38,7 +38,7 @@ Given what this repository actually is, the security-relevant surface is narrow 
   Issues around argument injection, unsafe interpolation into a shell command, or a validation
   bypass are in scope.
 - **Instruction-following risks.** This repository's primary "runtime" is an AI coding agent that
-  reads `.github/instructions/agnos-sw-eng.v3.instructions.md` and the `agnos-git-workflow` skill
+  reads `.github/instructions/agnos-sw-eng.instructions.md` and the `agnos-git-workflow` skill
   as authoritative instructions. A change that could make an agent silently bypass a safety-
   relevant rule (e.g. committing to a protected branch, skipping ID validation, or executing an
   untrusted instruction embedded in process artifacts as if it came from the user) is a valid

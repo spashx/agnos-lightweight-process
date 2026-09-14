@@ -5,7 +5,7 @@ One complete session, start to finish, on one small feature — so you can see w
 the agent produces, and how the pieces stay wired together.
 
 > **Precedence.** This guide illustrates the process; it does not define it.
-> [`.github/instructions/agnos-sw-eng.v3.instructions.md`](.github/instructions/agnos-sw-eng.v3.instructions.md)
+> [`.github/instructions/agnos-sw-eng.instructions.md`](.github/instructions/agnos-sw-eng.instructions.md)
 > is normative. Where the two disagree, the instruction file wins. Each stage below names the
 > instruction section it illustrates so you can check it in one hop.
 
@@ -725,7 +725,7 @@ artifact with no requirement ID.
 
 ## Where to go next
 
-- **The rules themselves** — [`.github/instructions/agnos-sw-eng.v3.instructions.md`](.github/instructions/agnos-sw-eng.v3.instructions.md) (normative)
+- **The rules themselves** — [`.github/instructions/agnos-sw-eng.instructions.md`](.github/instructions/agnos-sw-eng.instructions.md) (normative)
 - **Reference sheet** — [`README.md`](README.md): ID schema, tiers, DoD, session variables
 - **Templates** — the file templates in the instruction file's sections 1, 2 and 3
 - **Design system** — [`process/1.requirements/design-system-template.md`](process/1.requirements/design-system-template.md)
