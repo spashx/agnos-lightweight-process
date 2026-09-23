@@ -41,7 +41,7 @@ assignees: ""
 
 - AI tool: GitHub Copilot / Claude Code
 - `session.platform`: windows / macos / linux
-- Instructions file version: v3 / v2 / other (specify)
+- Instructions file version: v3 / v2 / other (specify - see releases for versions)
 
 ## Additional context
 

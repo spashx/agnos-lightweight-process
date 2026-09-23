@@ -1,6 +1,4 @@
-# AGNOS Software Engineering Process v3
-
-<!-- README-VERSION: v3 - 2026-09-11T23:06:46Z -->
+# AGNOS Software Engineering Process
 
 **AGNOS** is a lightweight, agentic AI-driven software engineering process designed for high traceability, maintainability, and rapid feature delivery. It enforces a clear workflow from requirements through architecture decisions to implementation, with version-controlled session state.
 
@@ -28,7 +26,7 @@
 Every session follows these steps:
 
 1. **Load instructions** — Copilot auto-loads `.github/instructions/agnos-sw-eng.instructions.md`; Claude Code auto-loads the root `CLAUDE.md`, which imports the same file
-2. **Resolve session state** — Detect platform, ask user about unit tests and chat mode (`askQuestion` on Copilot, `AskUserQuestion` on Claude Code), write `session.yaml`
+2. **Resolve session state** — Detect platform, ask user about unit tests (`askQuestion` on Copilot, `AskUserQuestion` on Claude Code), write `session.yaml`
 3. **Scan artifacts** — Check for open requirements, ADRs, and plans
 4. **Create branch** — Use the `agnos-git-workflow` skill's `start-session <TRI>` sub-command
 5. **Execute tasks** — Follow the plan, tier, and delivery checklist; Tier M/L tasks are test-first and record `Verification`/`Assumptions` evidence
@@ -72,13 +70,11 @@ Stored in `process/_sessionstate/session.yaml`, controlled at session start:
 ```yaml
 unit_tests: true          # User variable: generate/run tests? (affects Testing section)
 platform: windows         # System variable: detect OS (affects shell commands)
-chat_mode: normal         # User variable: "normal" | "chat-eco" (affects chat verbosity)
 ```
 
 **Guard syntax:**
 - `WHILE session.unit_tests = false`: skip all Testing steps
 - `ALWAYS use session.platform`: use platform-specific shell syntax
-- `WHILE session.chat_mode = chat-eco`: keep all chat replies minimal (files and commits keep full rigor)
 
 ### Task Tiers
 
@@ -193,4 +189,3 @@ Long sessions degrade output quality. If you exceed 10 tasks in a session:
 
 ---
 
-**Version**: v3

@@ -1,3 +1,2 @@
 unit_tests: true        # boolean — user variable: generate and run unit tests
 platform: windows       # string — system variable: "windows" | "macos" | "linux"
-chat_mode: normal       # string — user variable: "normal" | "chat-eco"

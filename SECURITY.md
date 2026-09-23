@@ -3,12 +3,7 @@
 ## Supported Versions
 
 This repository ships the **AGNOS Software Engineering Process** definition, not a deployed
-service. "Version" refers to the instructions file revision.
-
-| Version | Supported |
-| ------- | --------- |
-| v3 (`agnos-sw-eng.instructions.md`) | :white_check_mark: |
-| v2 and earlier | :x: (superseded, no fixes) |
+service. Only the latest version (see CHANGELOG.MD) is supported.
 
 ## Reporting a Vulnerability
 

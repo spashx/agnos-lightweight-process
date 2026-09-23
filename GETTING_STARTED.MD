@@ -64,10 +64,9 @@ Start a new AGNOS session, trigram EXP.
 1. Reads the instruction file and any stack-specific instructions in the project.
 2. **Probes your platform** — runs `$PSVersionTable` (Windows) or `uname -s` (macOS/Linux) and sets
    `platform`. This is a system variable: you are not asked.
-3. **Asks you two questions**, using your tool's question UI (`AskUserQuestion` in Claude Code,
+3. **Asks you a question**, using your tool's question UI (`AskUserQuestion` in Claude Code,
    `askQuestion` in Copilot):
    - *Should unit tests be generated and run in this session?* → `unit_tests`
-   - *Chat reporting mode: normal or chat-eco?* → `chat_mode`
 4. **Writes `process/_sessionstate/session.yaml`** and shows you a summary table you can override.
 5. **Scans** `process/1.requirements/`, `2.architecture/` and `3.plan/` so it does not renumber over
    an existing `RQ-EXP-001` or duplicate an existing ADR.
@@ -82,7 +81,6 @@ Start a new AGNOS session, trigram EXP.
 ```yaml
 unit_tests: true        # boolean — user variable: generate and run unit tests
 platform: windows       # string — system variable: "windows" | "macos" | "linux"
-chat_mode: normal       # string — user variable: "normal" | "chat-eco"
 ```
 
 That file is the single source of truth for the whole session, and it is committed. It is not
@@ -92,7 +90,6 @@ decoration — it changes agent behaviour:
 |---|---|
 | `unit_tests: false` | The agent skips the entire Testing section. No test files, no test runs. |
 | `platform: windows` | Every shell command the agent generates is PowerShell. No `ls`, no `grep`. |
-| `chat_mode: chat-eco` | Chat replies become status-only. File and commit rigour is unchanged. |
 
 **Your job here:** check the summary table. If `unit_tests` came back `true` but you are spiking a
 throwaway prototype, say so now — changing it later means the session has been running under the
