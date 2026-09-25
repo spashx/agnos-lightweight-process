@@ -14,4 +14,4 @@ worth calling out explicitly :
   procedure at `.github/skills/agnos-git-workflow/SKILL.md` — read and follow that procedure.
 - **Index skill**: use the skill named `agnos-index`. Under Claude Code it is discovered at
   `.claude/skills/agnos-index/SKILL.md`, which points to the canonical procedure at
-  `.github/skills/agnos-index/SKILL.md` — read and follow that procedure. <!-- RQ-IDX-010 -->
+  `.github/skills/agnos-index/SKILL.md` — read and follow that procedure.

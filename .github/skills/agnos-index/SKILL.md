@@ -4,7 +4,6 @@ description: "AGNOS process index skill. Regenerates process/INDEX.idx.md, the m
 argument-hint: "(no arguments)"
 ---
 
-<!-- RQ-IDX-010, RQ-IDX-011, RQ-IDX-013 / ADR-IDX-001 (DEC-IDX-001, DEC-IDX-003, DEC-IDX-004) -->
 # AGNOS Index
 
 Canonical procedure, shared by GitHub Copilot (`.github/skills/agnos-index/`) and Claude Code

@@ -76,7 +76,7 @@ given, otherwise `<type>(<TRI>): <TASK-ID> <description>`, where:
 3. If ADR-ID was provided, validate it using `<validate-ids>` with `-Type ADR -Value <ADR-ID>`.
    If exit code ≠ 0: report the error and STOP.
 
-4. Refresh the process index by invoking the `agnos-index` skill. <!-- RQ-IDX-012 -->
+4. Refresh the process index by invoking the `agnos-index` skill.
    If exit code ≠ 0: report the error or duplicates and STOP. Do NOT commit.
 
 5. Determine `<type>` and build the commit message per the format above.

@@ -21,7 +21,7 @@ The whole process artifacts are managed into the `process/` folder of the worksp
 - `process/2.architecture/` – Architecture Decision Records (ADRs) files
 - `process/3.plan/` – Plan files with PLAN-* and TASK-* definitions
 - `process/_sessionstate/` – Session state YAML file (`session.yaml`) and the cross-session friction-metrics log (`METRICS_LOG.md`), both version-controlled
-- `process/INDEX.idx.md` – Generated index (ID, line range, status, title) of all artifact definitions, version-controlled. It SHALL be written ONLY by the `agnos-index` skill, NEVER by hand. <!-- RQ-IDX-013 -->
+- `process/INDEX.idx.md` – Generated index (ID, line range, status, title) of all artifact definitions, version-controlled. It SHALL be written ONLY by the `agnos-index` skill, NEVER by hand. 
  
 ## START SESSION ACTION
 
@@ -43,7 +43,7 @@ At the start of every session, run these steps in order before any task:
      Before starting any Tier M or L task, if session variable values are not in active context,
      read `process/_sessionstate/session.yaml` and reload them before applying any conditional guard.
 4. Invoke the `agnos-index` skill, then read `process/INDEX.idx.md`: it is the primary source for
-   steps 4 to 6, which open process documents only by the line ranges it gives. <!-- RQ-IDX-011 -->
+   steps 4 to 6, which open process documents only by the line ranges it gives.
    Scan `process/1.requirements/` for open or unimplemented requirement IDs.
 5. Scan `process/2.architecture/` for existing ADRs to avoid creating duplicates.
 6. Scan `process/3.plan/` for existing plans and tasks to avoid creating duplicates.
@@ -233,7 +233,7 @@ Brief description of the feature's purpose and scope.
   ## Diagram
   [Mermaid diagram -- required]
   ```
-- Every decision in ADR SHALL have a unique identifier in the format `DEC-<TRI>-<NNN>` (e.g., `DEC-USR-001`), consistent with the universal ID schema, that can be referenced in plans, tasks, and source code. Each decision SHALL be declared as a `### DEC-<TRI>-<NNN>: <title>` heading under `## Decision`, so that it is indexed. <!-- RQ-IDX-014 -->
+- Every decision in ADR SHALL have a unique identifier in the format `DEC-<TRI>-<NNN>` (e.g., `DEC-USR-001`), consistent with the universal ID schema, that can be referenced in plans, tasks, and source code. Each decision SHALL be declared as a `### DEC-<TRI>-<NNN>: <title>` heading under `## Decision`, so that it is indexed.
 - The design system itself SHALL be captured as an ADR (token structure, tiers, generation/verification mechanism). Every subsequent UI-affecting ADR SHALL reference it.
 
 

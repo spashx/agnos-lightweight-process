@@ -4,7 +4,6 @@ description: "AGNOS process index skill. Regenerates process/INDEX.idx.md, the m
 argument-hint: "(no arguments)"
 ---
 
-<!-- RQ-IDX-010 / ADR-IDX-001 -->
 # AGNOS Index (Claude Code entry point)
 
 This is a thin pointer, kept in sync with the canonical procedure so the AGNOS process has a
