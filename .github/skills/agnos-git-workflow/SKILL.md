@@ -76,13 +76,16 @@ given, otherwise `<type>(<TRI>): <TASK-ID> <description>`, where:
 3. If ADR-ID was provided, validate it using `<validate-ids>` with `-Type ADR -Value <ADR-ID>`.
    If exit code ≠ 0: report the error and STOP.
 
-4. Determine `<type>` and build the commit message per the format above.
+4. Refresh the process index by invoking the `agnos-index` skill. <!-- RQ-IDX-012 -->
+   If exit code ≠ 0: report the error or duplicates and STOP. Do NOT commit.
 
-5. Confirm the computed commit message with the user:
+5. Determine `<type>` and build the commit message per the format above.
+
+6. Confirm the computed commit message with the user:
    > "About to commit: `<message>`. Proceed?"
    Wait for confirmation.
 
-6. Execute:
+7. Execute:
    ```
    git add .
    git commit -m "<message>"
