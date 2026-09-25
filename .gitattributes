@@ -1,0 +1,4 @@
+# RQ-IDX-015 / DEC-IDX-004: generated index and bash scripts always LF; test data kept byte-exact
+process/INDEX.idx.md text eol=lf
+.github/skills/agnos-index/scripts/*.sh text eol=lf
+.github/skills/agnos-index/tests/** -text
